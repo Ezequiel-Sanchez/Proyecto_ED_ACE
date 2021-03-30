@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class Documento {
 	private ArrayList<Linea> lineas;
 	Utiles util = new Utiles();
+	Escritura fw=new Escritura();
+	Leerfichero fr=new Leerfichero();
+	String linea ="", aux="", print="";
 
 	public Documento() {
 		lineas = new ArrayList<Linea>();
@@ -17,7 +20,23 @@ public class Documento {
 		} else {
 			lineaNueva.setLineaNum(1);
 		}
-		lineaNueva.setLineaTxt(texto);
+		linea = aux+texto;
+		aux="";
+		if (linea.length() > 150) {
+			for (int i = 0; i < linea.length(); i++) {
+				if (i < 150) {
+					print += linea.charAt(i);
+				} else {
+					aux += linea.charAt(i);
+				}
+			}
+			aux+=" ";
+			lineaNueva.setLineaTxt(print);
+			print="";
+		}else {
+		lineaNueva.setLineaTxt(linea);
+		linea="";
+		}
 		lineas.add(lineaNueva);
 	}
 
@@ -58,7 +77,7 @@ public class Documento {
 
 	public void saveFile(String ruta) {
 		for (Linea doc : lineas) {
-			util.fileWriter(doc.getLineaTxt() + "\n", ruta);
+			fw.escritura(doc.getLineaTxt() + "\n", ruta);
 		}
 
 	}
@@ -70,7 +89,7 @@ public class Documento {
 //		for (Linea doc:lineas) {
 //			fw.escribirArchivo(doc.getLineaTxt());
 //		}
-		doc=util.leerFichero(ruta);
+		doc=fr.lectura(ruta);
 //		for (int i =0; i<doc.length();i++) {
 //				if (i+25<doc.length()) {
 //					i+=25;
@@ -89,5 +108,9 @@ public class Documento {
 		lineas.add(ln);
 		
 		}
+	}
+
+	public String getAux() {
+		return aux;
 	}
 }

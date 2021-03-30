@@ -1,52 +1,52 @@
 package proyecto_ED;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Leerfichero {
+	Utiles util = new Utiles();
 
+	public String lectura(String fichero) {
+		BufferedWriter bw;
+		BufferedReader br;
+		String linea = "", aux = "", print = "";
+		try {
+			br = new BufferedReader(new FileReader(fichero));
+			while (br.ready()) {
 
-	public static void main(String[] args) throws Exception {
-	
-
-	
-		
-		File dir =new File("D:\\00Usuarios\\Admin\\Desktop\\ficheros");
-	
-	
-		for(File fichero : dir.listFiles()) {	
-		if(! fichero.isDirectory()) {
-			String linea="";	
-			System.out.println("Leyendo..."+fichero);
-			BufferedReader br =new BufferedReader(new FileReader(fichero));
-			
-			linea = br.readLine();
-			while(linea!=null) {
-				System.out.println("\t" + linea);
-				linea = br.readLine();
-				break;
+				linea += aux + br.readLine();
+				aux="";
+				if (linea.length() > 150) {
+					for (int i = 0; i < linea.length(); i++) {
+						if (i < 150) {
+							print += linea.charAt(i);
+						} else {
+							aux += linea.charAt(i);
+						}
+					}
+					aux+=";";
+				} else {
+					print += linea;
 				}
+				
+				print += ";";
+				linea="";
+			}
+			br.close();
+		} catch (IOException ex) {
+			util.setError(
+					"¡¡ATENCION!! El sistema no puede encontrar el archivo especificado (verifica la ruta y escribe el nombre del fichero sin la extensión)");
+		} catch (Exception ex) {
+			util.setError("¡¡ATENCION!! error desconocido (buscar el log file en c:\\errorlog\\java\\log.txt)");
+			File dir = new File("c:\\errorlog\\java");
+			dir.mkdirs();
+			try {
+				bw = new BufferedWriter(new FileWriter("c:\\errorlog\\java\\log.txt", true));
+				bw.write("la fecha y hora \n" + ex.toString() + "\n");
+				bw.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 		}
-		
+		return print;
 	}
-		public static void LeerFichero(File fichero) throws IOException {
-			
-			BufferedReader br = new BufferedReader(new FileReader(fichero));
-			String linea = br.readLine();
-			
-			while(linea !=null) {
-				System.out.println(linea);
-				linea = br.readLine();
-			}
-			
-		}
-	}
- 
-
-	
-
-
+}

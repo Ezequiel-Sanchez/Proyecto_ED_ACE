@@ -1,7 +1,5 @@
 package proyecto_ED;
 
-import java.io.*;
-
 public class Utiles {
 	static String opciones[] = new String[5];
 	static String status[] = new String[4];
@@ -53,6 +51,10 @@ public class Utiles {
 
 	public void errorCls(){
 		status[3] = "";
+	}
+	
+	public void setError(String e) {
+		status[3] = e;
 	}
 
 	public void setStatus(String st1, String st2, String st3) {
@@ -109,95 +111,58 @@ public class Utiles {
 
 	}
 
-	public String fileRead(String ruta) { // ------------------------------- devuelve una cadena String con todo el
-											// contenido del fichero
-		String texto = "", linea = "";
-		try {
-			FileReader fr = new FileReader(ruta);
-			BufferedReader br = new BufferedReader(fr);
-			int counter = 0;
-			linea = br.readLine();
-			while (linea != null) {
-				counter += linea.split(" ").length;
-				texto += linea + "\n";
-				linea = br.readLine();
-
-			}
-			System.out.println("Fichero leido correctamente.. se han leido " + counter + " palabras. y contiene "
-					+ texto.length() + " caracteres.");
-			br.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("404 file not found");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("I/O ERROR");
-			e.printStackTrace();
-		}
-		return texto;
-	}
-
-	public void fileWriter(String entrada, String ruta) {
-//		File dir = null;
-//		FileWriter fw = null;
-		BufferedWriter bw = null;
-//		String linea="";
-		try {
-			String directorio = "";
-			for(int i=0;i<ruta.lastIndexOf('\\');i++) {
-				directorio += ruta.charAt(i);
-			}
-			File dir = new File(directorio);
-			dir.mkdirs();
-			bw = new BufferedWriter(new FileWriter(ruta, true));			//no se si me esta liando esto pero creo que no hace falta pq cargo todo el documento al array y luego al guardarlo se duplicaria
-			bw.write(entrada);
-			bw.close();
-
-		} 	
-		catch (IOException e) {
-			status[3] = "¡¡ATENCION!! Acceso denegado (verifica que no estas usando caracteres especiales y/o que no estas tratando de crear el archivo directamente en la raiz";
-			
-		} 
-		catch (Exception e) {
-			status[3] = "¡¡ATENCION!! error desconocido (buscar el log file en c:\\errorlog\\java\\log.txt)";
-			File dir = new File("c:\\errorlog\\java");
-			dir.mkdirs();
-				try {
-					bw = new BufferedWriter(new FileWriter("c:\\errorlog\\java\\log.txt", true));
-					bw.write("la fecha y hora \n"+e.toString()+"\n");
-					bw.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-				
-			
-		}
-//		catch (Exception e) {
+//	public String fileRead(String ruta) {//devuelve una cadena String con todo el contenido del fichero
+//		String texto = "", linea = "";
+//		try {
+//			FileReader fr = new FileReader(ruta);
+//			BufferedReader br = new BufferedReader(fr);
+//			int counter = 0;
+//			linea = br.readLine();
+//			while (linea != null) {
+//				counter += linea.split(" ").length;
+//				texto += linea + "\n";
+//				linea = br.readLine();
+//
+//			}
+//			System.out.println("Fichero leido correctamente.. se han leido " + counter + " palabras. y contiene "
+//					+ texto.length() + " caracteres.");
+//			br.close();
+//		} catch (FileNotFoundException e) {
+//			System.out.println("404 file not found");
 //			e.printStackTrace();
-//			status[3] = "¡¡ATENCION!! Ha ocurrido un error > .fileWriter > intentalo denuevo";
-//			// podria meter aqui un mkdir y reintentar el guardado del archivo?
+//		} catch (IOException e) {
+//			System.out.println("I/O ERROR");
+//			e.printStackTrace();
 //		}
-
-	}
+//		return texto;
+//	}
 	
-	public String leerFichero(String fichero){
-		
-		BufferedReader br;
-		String linea ="";
-		try {
-			br = new BufferedReader(new FileReader(fichero));
-		while(br.ready()) {
-			linea += br.readLine();
-			linea +=";";
-		}
-		br.close();
-	} 	catch (FileNotFoundException e) {
-		e.printStackTrace();
-		status[3] = "¡¡ATENCION!! El sistema no puede encontrar la ruta especificada";
-	} catch (IOException e) {
-		e.printStackTrace();
-		status[3] = "¡¡ATENCION!! Ha ocurrido un error > .leerFichero > intentalo denuevo";
-	}
-		return linea;
-	}
+//	public String leerFichero(String fichero){
+//		BufferedWriter bw;
+//		BufferedReader br;
+//		String linea ="";
+//		try {
+//			br = new BufferedReader(new FileReader(fichero));
+//		while(br.ready()) {
+//			linea += br.readLine();
+//			linea +=";";
+//		}
+//		br.close();
+//	} 	catch (IOException ex) {
+//		setError("¡¡ATENCION!! El sistema no puede encontrar el archivo especificado (verifica la ruta y escribe el nombre del fichero sin la extensión)");
+//	} catch (Exception ex) {
+//		setError("¡¡ATENCION!! error desconocido (buscar el log file en c:\\errorlog\\java\\log.txt)");
+//		File dir = new File("c:\\errorlog\\java");
+//		dir.mkdirs();
+//		try {
+//			bw = new BufferedWriter(new FileWriter("c:\\errorlog\\java\\log.txt", true));
+//			bw.write("la fecha y hora \n" + ex.toString() + "\n");
+//			bw.close();
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
+//	}
+//		return linea;
+//	}
 
 }
