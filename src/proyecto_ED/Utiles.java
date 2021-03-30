@@ -4,9 +4,10 @@ import java.io.*;
 
 public class Utiles {
 	static String opciones[] = new String[5];
-	static String status[] = new String[3];
+	static String status[] = new String[4];
 //	Documento doc = new Documento(); //test
-	Main eme=new Main();
+	Main eme = new Main();
+	
 	
 	public void cls() {
 		System.out.print("\n\n\n\n\n\n\n\n\n\n" + "\n\n\n\n\n\n\n\n\n\n" + "\n\n\n\n\n\n\n\n\n\n"
@@ -39,15 +40,19 @@ public class Utiles {
 		for (int i = 0; i < opciones.length; i++) {
 			if (opciones[i].isEmpty()) {
 			} else {
-				opciones[i]="| -"+(i+1)+". " + opciones[i];
-				int largo=opciones[i].length();
-				for (int j = 0; j < (160-largo);j++) {
+				opciones[i] = "| -" + (i + 1) + ". " + opciones[i];
+				int largo = opciones[i].length();
+				for (int j = 0; j < (160 - largo); j++) {
 					opciones[i] += " ";
 				}
-				opciones[i]+="|";
+				opciones[i] += "|";
 				System.out.println(opciones[i]);
 			}
 		}
+	}
+
+	public void errorCls(){
+		status[3] = "";
 	}
 
 	public void setStatus(String st1, String st2, String st3) {
@@ -57,30 +62,30 @@ public class Utiles {
 	}
 
 	public static void getStatus() {
-		String printstat="";
+		String printstat = "";
 		for (int i = 0; i < status.length; i++) {
 			if (status[i].isEmpty()) {
 			} else {
-				printstat="|"+status[i];
-				for (int j =0;j<(159-status[i].length());j++) {
-					printstat+=" ";
+				printstat = "|" + status[i];
+				for (int j = 0; j < (159 - status[i].length()); j++) {
+					printstat += " ";
 				}
-				printstat+="|";
+				printstat += "|";
 				System.out.println(printstat);
 			}
 		}
 	}
 
 	public void getTitle(String title) {
-		String titulo="|";
-		for (int i = 0; i < (160-title.length()); i++) {
-			if (titulo.length()==(160-title.length())/2) {
+		String titulo = "|";
+		for (int i = 0; i < (160 - title.length()); i++) {
+			if (titulo.length() == (160 - title.length()) / 2) {
 				titulo += title;
 			} else {
 				titulo += " ";
 			}
 		}
-		titulo+="|";
+		titulo += "|";
 		System.out.println(titulo);
 	}
 
@@ -96,16 +101,13 @@ public class Utiles {
 				"+---------------------------------------------------------------------------------------------------------------------------------------------------------------+");
 //		+"\n  "+doc.getSize()+"\n"+doc.toString()); //test
 		Main.getContenido();
-		System.out.println(		
+		System.out.println(
 				"+---------------------------------------------------------------------------------------------------------------------------------------------------------------+");
 		getStatus();
 		System.out.println(
 				"+---------------------------------------------------------------------------------------------------------------------------------------------------------------+");
 
 	}
-
-
-
 
 	public String fileRead(String ruta) { // ------------------------------- devuelve una cadena String con todo el
 											// contenido del fichero
@@ -137,21 +139,65 @@ public class Utiles {
 	public void fileWriter(String entrada, String ruta) {
 //		File dir = null;
 //		FileWriter fw = null;
-		BufferedWriter bw =null;
+		BufferedWriter bw = null;
 //		String linea="";
 		try {
-//			dir = new File(ruta);
-//			dir.mkdirs();
-			bw = new BufferedWriter(new FileWriter(ruta, true));
+			String directorio = "";
+			for(int i=0;i<ruta.lastIndexOf('\\');i++) {
+				directorio += ruta.charAt(i);
+			}
+			File dir = new File(directorio);
+			dir.mkdirs();
+			bw = new BufferedWriter(new FileWriter(ruta, true));			//no se si me esta liando esto pero creo que no hace falta pq cargo todo el documento al array y luego al guardarlo se duplicaria
 			bw.write(entrada);
 			bw.close();
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} 	
+		catch (IOException e) {
+			status[3] = "　ATENCION!! Acceso denegado (verifica que no estas usando caracteres especiales y/o que no estas tratando de crear el archivo directamente en la raiz";
+			
+		} 
+		catch (Exception e) {
+			status[3] = "　ATENCION!! error desconocido (buscar el log file en c:\\errorlog\\java\\log.txt)";
+			File dir = new File("c:\\errorlog\\java");
+			dir.mkdirs();
+				try {
+					bw = new BufferedWriter(new FileWriter("c:\\errorlog\\java\\log.txt", true));
+					bw.write("la fecha y hora \n"+e.toString()+"\n");
+					bw.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+			
 		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//			status[3] = "　ATENCION!! Ha ocurrido un error > .fileWriter > intentalo denuevo";
+//			// podria meter aqui un mkdir y reintentar el guardado del archivo?
+//		}
 
 	}
-
-
+	
+	public String leerFichero(String fichero){
+		
+		BufferedReader br;
+		String linea ="";
+		try {
+			br = new BufferedReader(new FileReader(fichero));
+		while(br.ready()) {
+			linea += br.readLine();
+			linea +=";";
+		}
+		br.close();
+	} 	catch (FileNotFoundException e) {
+		e.printStackTrace();
+		status[3] = "　ATENCION!! El sistema no puede encontrar la ruta especificada";
+	} catch (IOException e) {
+		e.printStackTrace();
+		status[3] = "　ATENCION!! Ha ocurrido un error > .leerFichero > intentalo denuevo";
+	}
+		return linea;
+	}
 
 }

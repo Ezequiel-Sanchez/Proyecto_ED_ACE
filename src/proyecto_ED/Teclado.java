@@ -3,7 +3,7 @@ package proyecto_ED;
 import java.util.Scanner;
 
 public class Teclado {
-	private char n[]= new char[] {'0','1','2','3','4','5','6','7','8','9'}; 
+	private char n[] = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 	private Scanner ent;
 	private boolean error;
 	private int num;
@@ -174,7 +174,7 @@ public class Teclado {
 
 	public int getNum(String numeros) { // para componer el numero
 		boolean ok = false;
-		num=0;
+		num = 0;
 		for (int contador = 0; contador < numeros.length(); contador++) {
 			ok = false;
 			for (int i = 0; i < n.length; i++) {
