@@ -14,7 +14,7 @@ public class Leerfichero {
 			while (br.ready()) {
 
 				linea += aux + br.readLine();
-				aux="";
+				aux = "";
 				if (linea.length() > 150) {
 					for (int i = 0; i < linea.length(); i++) {
 						if (i < 150) {
@@ -23,18 +23,16 @@ public class Leerfichero {
 							aux += linea.charAt(i);
 						}
 					}
-					aux+=";";
+					aux += ";";
 				} else {
 					print += linea;
 				}
-				
 				print += ";";
-				linea="";
+				linea = "";
 			}
 			br.close();
 		} catch (IOException ex) {
-			util.setError(
-					"¡¡ATENCION!! El sistema no puede encontrar el archivo especificado (verifica la ruta y escribe el nombre del fichero sin la extensión)");
+			util.setError("¡¡ATENCION!! El sistema no puede encontrar el archivo especificado (verifica la ruta y escribe el nombre del fichero sin la extensión)");
 		} catch (Exception ex) {
 			util.setError("¡¡ATENCION!! error desconocido (buscar el log file en c:\\errorlog\\java\\log.txt)");
 			File dir = new File("c:\\errorlog\\java");

@@ -1,7 +1,7 @@
 package proyecto_ED;
 
 public class Main {
-	static String printlinea = "", siguientelinea="";
+	static String printlinea = "", siguientelinea = "";
 	static Documento doc = new Documento();
 
 	public static void main(String arg[]) {
@@ -16,6 +16,7 @@ public class Main {
 		do {
 			util.setOpciones("Crear / Modificar fichero", "Buscar fichero", "Salir", "", "");
 			util.menu("Menu principal");
+			util.errorCls();
 			opcion = ent.getOpcion(1, 3);
 			switch (opcion) {
 			case 1:
@@ -27,6 +28,7 @@ public class Main {
 					util.setOpciones("!gg (guardar documento)", "!bl (borrar linea)", "!rl (reemplazar linea)",
 							"!bt (borrartodo)", "!x (salir)");
 					util.menu("Crear fichero");
+					util.errorCls();
 					comando = ent.getString("Escribe..");
 					switch (comando) {
 					case "!gg":
@@ -45,6 +47,7 @@ public class Main {
 								"");
 						util.setOpciones("!cancelar", "", "", "", "");
 						util.menu("Borrar linea");
+						util.errorCls();
 						comando = ent.getString("Escribe..");
 						switch (comando) {
 						case "!c":
@@ -62,6 +65,7 @@ public class Main {
 								"");
 						util.setOpciones("!cancelar", "", "", "", "");
 						util.menu("Borrar linea");
+						util.errorCls();
 						comando = ent.getString("Escribe..");
 						switch (comando) {
 						case "!c":
@@ -90,7 +94,8 @@ public class Main {
 			case 2:
 				buscando = true;
 				do {
-					util.setStatus("Ejemplo de ruta:", "C:\\Users\\Username\\Desktop\\nombredocumento  << reemplaza \"Username\" con tu nombre de usuario de windows",
+					util.setStatus("Ejemplo de ruta:",
+							"C:\\Users\\Username\\Desktop\\nombredocumento  << reemplaza \"Username\" con tu nombre de usuario de windows",
 							"No es necesario incluir la extensión en el nombre del fichero");
 					util.setOpciones("!x (salir de la busqueda)",
 							"!ba (borrar archivo sera implementado en proximas actualizaciones)",
@@ -121,6 +126,7 @@ public class Main {
 			case 3:
 				util.setStatus("Ha cerrado la aplicación", "", "");
 				util.setOpciones("", "", "", "", "");
+				util.errorCls();
 				util.menu("Ha cerrado la aplicación");
 				run = false;
 			}
@@ -144,8 +150,8 @@ public class Main {
 			printlinea += "|";
 			System.out.println(printlinea);
 		}
-		siguientelinea = "| >>   "+doc.getAux();
-		String nl =siguientelinea;
+		siguientelinea = "| >>   " + doc.getAux();
+		String nl = siguientelinea;
 		for (int j = 0; j < (160 - nl.length()); j++) {
 			siguientelinea += " ";
 		}

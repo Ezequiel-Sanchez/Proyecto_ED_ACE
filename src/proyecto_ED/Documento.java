@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Documento {
 	private ArrayList<Linea> lineas;
 	Utiles util = new Utiles();
-	Escritura fw=new Escritura();
-	Leerfichero fr=new Leerfichero();
-	String linea ="", aux="", print="";
+	Escribirfichero fw = new Escribirfichero();
+	Leerfichero fr = new Leerfichero();
+	String linea = "", aux = "", print = "";
 
 	public Documento() {
 		lineas = new ArrayList<Linea>();
@@ -20,8 +20,8 @@ public class Documento {
 		} else {
 			lineaNueva.setLineaNum(1);
 		}
-		linea = aux+texto;
-		aux="";
+		linea = aux + texto;
+		aux = "";
 		if (linea.length() > 150) {
 			for (int i = 0; i < linea.length(); i++) {
 				if (i < 150) {
@@ -30,12 +30,12 @@ public class Documento {
 					aux += linea.charAt(i);
 				}
 			}
-			aux+=" ";
+			aux += " ";
 			lineaNueva.setLineaTxt(print);
-			print="";
-		}else {
-		lineaNueva.setLineaTxt(linea);
-		linea="";
+			print = "";
+		} else {
+			lineaNueva.setLineaTxt(linea);
+			linea = "";
 		}
 		lineas.add(lineaNueva);
 	}
@@ -83,30 +83,22 @@ public class Documento {
 	}
 
 	public void readFile(String ruta) {
-		String array[]=null;
-		String doc="";
+		String array[] = null;
+		String doc = "";
 		Linea ln;
-//		for (Linea doc:lineas) {
-//			fw.escribirArchivo(doc.getLineaTxt());
-//		}
-		doc=fr.lectura(ruta);
-//		for (int i =0; i<doc.length();i++) {
-//				if (i+25<doc.length()) {
-//					i+=25;
-//					doc.replaceFirst(doc.charAt(i)+doc.charAt(i+1), (doc.charAt(i)+";"));			
-//				}
-//		}
+
+		doc = fr.lectura(ruta);
 		array = doc.split(";");
-		for (String linea:array) {
-		ln = new Linea();
-		if (lineas.size() > 0) {
-			ln.setLineaNum(lineas.get(lineas.size() - 1).getLineaNum() + 1);
-		} else {
-			ln.setLineaNum(1);
-		}
-		ln.setLineaTxt(linea);
-		lineas.add(ln);
-		
+		for (String linea : array) {
+			ln = new Linea();
+			if (lineas.size() > 0) {
+				ln.setLineaNum(lineas.get(lineas.size() - 1).getLineaNum() + 1);
+			} else {
+				ln.setLineaNum(1);
+			}
+			ln.setLineaTxt(linea);
+			lineas.add(ln);
+
 		}
 	}
 

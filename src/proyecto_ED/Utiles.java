@@ -5,26 +5,11 @@ public class Utiles {
 	static String status[] = new String[4];
 //	Documento doc = new Documento(); //test
 	Main eme = new Main();
-	
-	
+
 	public void cls() {
 		System.out.print("\n\n\n\n\n\n\n\n\n\n" + "\n\n\n\n\n\n\n\n\n\n" + "\n\n\n\n\n\n\n\n\n\n"
 				+ "\n\n\n\n\n\n\n\n\n\n" + "\n\n\n\n\n\n\n\n\n\n");
 	}
-
-//	public void getContenido() { //test
-//		String printlinea="";
-//				System.out.println(doc.getSize());
-//		for (int i =0; i <doc.getSize();i++) {
-//			System.out.println("|"+i+"\t"+doc.getLinea(i));
-//			printlinea="|"+(i+1)+"\t"+doc.getLinea(i);
-//			for (int j =0;j<(160-doc.getSize());j++) {
-//				printlinea+=" ";
-//			}
-//			printlinea+="|";
-//			System.out.println(printlinea);
-//		}
-//	}
 
 	public void setOpciones(String op1, String op2, String op3, String op4, String op5) {
 		opciones[0] = op1;
@@ -49,10 +34,10 @@ public class Utiles {
 		}
 	}
 
-	public void errorCls(){
+	public void errorCls() {
 		status[3] = "";
 	}
-	
+
 	public void setError(String e) {
 		status[3] = e;
 	}
@@ -110,59 +95,5 @@ public class Utiles {
 				"+---------------------------------------------------------------------------------------------------------------------------------------------------------------+");
 
 	}
-
-//	public String fileRead(String ruta) {//devuelve una cadena String con todo el contenido del fichero
-//		String texto = "", linea = "";
-//		try {
-//			FileReader fr = new FileReader(ruta);
-//			BufferedReader br = new BufferedReader(fr);
-//			int counter = 0;
-//			linea = br.readLine();
-//			while (linea != null) {
-//				counter += linea.split(" ").length;
-//				texto += linea + "\n";
-//				linea = br.readLine();
-//
-//			}
-//			System.out.println("Fichero leido correctamente.. se han leido " + counter + " palabras. y contiene "
-//					+ texto.length() + " caracteres.");
-//			br.close();
-//		} catch (FileNotFoundException e) {
-//			System.out.println("404 file not found");
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			System.out.println("I/O ERROR");
-//			e.printStackTrace();
-//		}
-//		return texto;
-//	}
-	
-//	public String leerFichero(String fichero){
-//		BufferedWriter bw;
-//		BufferedReader br;
-//		String linea ="";
-//		try {
-//			br = new BufferedReader(new FileReader(fichero));
-//		while(br.ready()) {
-//			linea += br.readLine();
-//			linea +=";";
-//		}
-//		br.close();
-//	} 	catch (IOException ex) {
-//		setError("¡¡ATENCION!! El sistema no puede encontrar el archivo especificado (verifica la ruta y escribe el nombre del fichero sin la extensión)");
-//	} catch (Exception ex) {
-//		setError("¡¡ATENCION!! error desconocido (buscar el log file en c:\\errorlog\\java\\log.txt)");
-//		File dir = new File("c:\\errorlog\\java");
-//		dir.mkdirs();
-//		try {
-//			bw = new BufferedWriter(new FileWriter("c:\\errorlog\\java\\log.txt", true));
-//			bw.write("la fecha y hora \n" + ex.toString() + "\n");
-//			bw.close();
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
-//	}
-//		return linea;
-//	}
 
 }
