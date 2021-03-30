@@ -99,7 +99,6 @@ public class Main {
 					util.errorCls();
 					comando = ent.getString(
 							"Indica la ruta y el nombre del documento o escribe !x para abandonar la busqueda");
-					ruta = comando + ".txt";
 					switch (comando) {
 					case "!x":
 						buscando = false;
@@ -113,6 +112,7 @@ public class Main {
 						// ca.copiar(ruta,nuevaRuta); //crear clase CopiarArchivo
 						break;
 					default:
+						ruta = comando + ".txt";
 						doc.delDoc();
 						doc.readFile(ruta);
 					}
