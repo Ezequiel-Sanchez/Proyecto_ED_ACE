@@ -3,8 +3,7 @@ package proyecto_ED;
 public class Utiles {
 	static String opciones[] = new String[5];
 	static String status[] = new String[4];
-//	Documento doc = new Documento(); //test
-	Main eme = new Main();
+	Main main = new Main();
 
 	public void cls() {
 		System.out.print("\n\n\n\n\n\n\n\n\n\n" + "\n\n\n\n\n\n\n\n\n\n" + "\n\n\n\n\n\n\n\n\n\n"
@@ -86,14 +85,13 @@ public class Utiles {
 		getOpciones();
 		System.out.println(
 				"+---------------------------------------------------------------------------------------------------------------------------------------------------------------+");
-//		+"\n  "+doc.getSize()+"\n"+doc.toString()); //test
 		Main.getContenido();
 		System.out.println(
 				"+---------------------------------------------------------------------------------------------------------------------------------------------------------------+");
 		getStatus();
 		System.out.println(
 				"+---------------------------------------------------------------------------------------------------------------------------------------------------------------+");
-
+		errorCls();
 	}
 
 }

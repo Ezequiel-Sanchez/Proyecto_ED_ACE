@@ -15,6 +15,7 @@ public class Documento {
 
 	public void nuevaLinea(String texto) {
 		Linea lineaNueva = new Linea();
+
 		if (lineas.size() > 0) {
 			lineaNueva.setLineaNum(lineas.get(lineas.size() - 1).getLineaNum() + 1);
 		} else {
@@ -22,6 +23,7 @@ public class Documento {
 		}
 		linea = aux + texto;
 		aux = "";
+
 		if (linea.length() > 150) {
 			for (int i = 0; i < linea.length(); i++) {
 				if (i < 150) {
@@ -89,16 +91,18 @@ public class Documento {
 
 		doc = fr.lectura(ruta);
 		array = doc.split(";");
-		for (String linea : array) {
-			ln = new Linea();
-			if (lineas.size() > 0) {
-				ln.setLineaNum(lineas.get(lineas.size() - 1).getLineaNum() + 1);
-			} else {
-				ln.setLineaNum(1);
+		if (doc.isEmpty()) {
+		} else {
+			for (String linea : array) {
+				ln = new Linea();
+				if (lineas.size() > 0) {
+					ln.setLineaNum(lineas.get(lineas.size() - 1).getLineaNum() + 1);
+				} else {
+					ln.setLineaNum(1);
+				}
+				ln.setLineaTxt(linea);
+				lineas.add(ln);
 			}
-			ln.setLineaTxt(linea);
-			lineas.add(ln);
-
 		}
 	}
 

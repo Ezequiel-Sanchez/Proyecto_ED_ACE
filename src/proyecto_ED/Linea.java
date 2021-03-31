@@ -29,10 +29,4 @@ public class Linea {
 	public void setLineaTxt(String lineaTxt) {
 		this.lineaTxt = lineaTxt;
 	}
-	
-//	@Override
-//	public String toString() {
-//		return "Linea  " + lineaNum + " " + lineaTxt;
-//	}
-
 }

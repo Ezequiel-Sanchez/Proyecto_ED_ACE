@@ -13,14 +13,17 @@ public class Main {
 		boolean run = true, escribiendo = false, buscando = false;
 		util.errorCls();
 		util.setStatus("Bienvenido", "", "Selecciona una opcion del menu superior.");
+
 		do {
 			util.setOpciones("Crear / Modificar fichero", "Buscar fichero", "Salir", "", "");
 			util.menu("Menu principal");
-			util.errorCls();
 			opcion = ent.getOpcion(1, 3);
+
 			switch (opcion) {
+
 			case 1:
 				escribiendo = true;
+
 				do {
 					util.setStatus("Documento: " + ruta,
 							"El comando !x no guarda los cambios, procura usar el comando !gg antes de salir si no quieres perder los cambios.",
@@ -28,30 +31,34 @@ public class Main {
 					util.setOpciones("!gg (guardar documento)", "!bl (borrar linea)", "!rl (reemplazar linea)",
 							"!bt (borrartodo)", "!x (salir)");
 					util.menu("Crear fichero");
-					util.errorCls();
 					comando = ent.getString("Escribe..");
+
 					switch (comando) {
+
 					case "!gg":
-						util.setStatus("Ejemplo de ruta: " + "C:\\Users\\Username\\Desktop\\nombredocumento",
-								"No es necesario incluir la extensión (se asigna automaticamente .txt)",
-								"En caso de no existir la ruta se creara (No se pueden guardar archivos directamente en C:\\ (primero debes crear una carpeta por ejemplo: \"c:\\carpeta\\fichero\")");
+						util.setStatus("Documento: " + ruta,
+								"Ejemplo de ruta: C:\\Users\\Username\\Desktop\\nombredocumento "
+										+ "(No es necesario incluir la extensión se asigna automaticamente .txt)",
+								"En caso de no existir la ruta se creara (No se pueden guardar archivos directamente "
+										+ "en C:\\ (primero debes crear una carpeta por ejemplo: \"c:\\carpeta\\fichero\")");
 						util.setOpciones("", "", "", "", "");
 						util.menu("Guardando fichero...");
-						util.errorCls();
-						ruta = ent.getString("Indica el nombre y la ruta en la que quieres guardar el documento")
-								+ ".txt";
+						ruta = ent.getString("Indica el nombre y la ruta en la que quieres guardar el documento") + ".txt";
 						doc.saveFile(ruta);
 						break;
+
 					case "!bl":
 						util.setStatus("Ingresa el numero de linea que deseas eliminiar", "o escribe !c para cancelar",
 								"");
 						util.setOpciones("!cancelar", "", "", "", "");
 						util.menu("Borrar linea");
-						util.errorCls();
 						comando = ent.getString("Escribe..");
+
 						switch (comando) {
+
 						case "!c":
 							break;
+
 						default:
 							try {
 								doc.delLinea(ent.getNum(comando));
@@ -60,16 +67,19 @@ public class Main {
 							}
 						}
 						break;
+
 					case "!rl":
 						util.setStatus("Ingresa el numero de linea que deseas reemplazar", "o escribe !c para cancelar",
 								"");
 						util.setOpciones("!cancelar", "", "", "", "");
 						util.menu("Borrar linea");
-						util.errorCls();
 						comando = ent.getString("Escribe..");
+
 						switch (comando) {
+
 						case "!c":
 							break;
+
 						default:
 							try {
 								doc.repLinea(ent.getNum(comando),
@@ -79,20 +89,26 @@ public class Main {
 							}
 						}
 						break;
+
 					case "!bt":
 						doc.delDoc();
 						break;
+
 					case "!x":
 						doc.delDoc();
 						escribiendo = false;
 						break;
+
 					default:
 						doc.nuevaLinea(comando);
 					}
+
 				} while (escribiendo);
 				break;
+
 			case 2:
 				buscando = true;
+
 				do {
 					util.setStatus("Ejemplo de ruta:",
 							"C:\\Users\\Username\\Desktop\\nombredocumento  << reemplaza \"Username\" con tu nombre de usuario de windows",
@@ -101,21 +117,25 @@ public class Main {
 							"!ba (borrar archivo sera implementado en proximas actualizaciones)",
 							"!ca (copiar archivo sera implementado en proximas actualizaciones)", "", "");
 					util.menu("Buscar fichero");
-					util.errorCls();
 					comando = ent.getString(
 							"Indica la ruta y el nombre del documento o escribe !x para abandonar la busqueda");
+
 					switch (comando) {
+
 					case "!x":
 						buscando = false;
 						break;
+
 					case "!ba":
 						// ba.borrar(ruta); //crear clase BorrarArchivo
 						break;
+
 					case "!ca":
 						// String nuevaRuta = ent.getString("Indica la ruta donde deseas copiar el
 						// documento");
 						// ca.copiar(ruta,nuevaRuta); //crear clase CopiarArchivo
 						break;
+
 					default:
 						ruta = comando + ".txt";
 						doc.delDoc();
@@ -123,6 +143,7 @@ public class Main {
 					}
 				} while (buscando);
 				break;
+
 			case 3:
 				util.setStatus("Ha cerrado la aplicación", "", "");
 				util.setOpciones("", "", "", "", "");
@@ -158,5 +179,4 @@ public class Main {
 		siguientelinea += "|";
 		System.out.println(siguientelinea);
 	}
-
 }
